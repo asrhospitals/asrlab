@@ -16,12 +16,12 @@ const router = express.Router();
 
 
 
-//AWS SDK FOR IMAGE STORAGE
- const s3 = new AWS.S3({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey:process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_REGION
- });
+// //AWS SDK FOR IMAGE STORAGE
+//  const s3 = new AWS.S3({
+//   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+//   secretAccessKey:process.env.AWS_SECRET_ACCESS_KEY,
+//   region: process.env.AWS_REGION
+//  });
 
 // Configure multer
 const storage = multer.memoryStorage();
@@ -72,22 +72,22 @@ router.post(
         remark,
       } = req.body;
 
-      // Handle file upload to S3 (or your preferred cloud storage)
-      let fileUrl = null;
-      if (req.file) {
-      const fileKey = `patients/${hospital_id}/${uuidv4()}-${req.file.originalname}`;
+      // // Handle file upload to S3 (or your preferred cloud storage)
+      // let fileUrl = null;
+      // if (req.file) {
+      // const fileKey = `patients/${hospital_id}/${uuidv4()}-${req.file.originalname}`;
 
-      const uploadParams = {
-        Bucket:process.env.AWS_BUCKET_NAME,
-        Key: fileKey,
-        Body: req.file.buffer,
-        ContentType: req.file.mimetype
-      }; 
+      // const uploadParams = {
+      //   Bucket:process.env.AWS_BUCKET_NAME,
+      //   Key: fileKey,
+      //   Body: req.file.buffer,
+      //   ContentType: req.file.mimetype
+      // }; 
       
-       // Upload to S3
-       const uploadResult = await s3.upload(uploadParams).promise();
-        fileUrl = uploadResult.Location; // Get the URL of the uploaded file
-        }
+      //  // Upload to S3
+      //  const uploadResult = await s3.upload(uploadParams).promise();
+      //   fileUrl = uploadResult.Location; // Get the URL of the uploaded file
+      //   }
             
      
 
