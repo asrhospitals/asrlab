@@ -8,6 +8,8 @@ const verifyToken=require("../../middlewares/authMiddileware");
 const role=require("../../middlewares/roleMiddleware");
 const { v4: uuidv4 } = require('uuid');
 const router = express.Router();
+const {S3Client}=require("@aws-sdk/client-s3");
+
 
 
 
