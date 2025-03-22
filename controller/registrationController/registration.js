@@ -23,12 +23,12 @@ const router = express.Router();
 //   region: process.env.AWS_REGION
 //  });
 
-// Configure multer
-const storage = multer.memoryStorage();
-const upload = multer({ 
-  storage: storage,
-  limits: { fileSize: 10 * 1024 * 1024 } // 10MB limit
-});
+// // Configure multer
+// const storage = multer.memoryStorage();
+// const upload = multer({ 
+//   storage: storage,
+//   limits: { fileSize: 10 * 1024 * 1024 } // 10MB limit
+// });
 
 
 
@@ -72,7 +72,7 @@ router.post(
         remark,
       } = req.body;
 
-      // // Handle file upload to S3 (or your preferred cloud storage)
+      // Handle file upload to S3 (or your preferred cloud storage)
       // let fileUrl = null;
       // if (req.file) {
       // const fileKey = `patients/${hospital_id}/${uuidv4()}-${req.file.originalname}`;
