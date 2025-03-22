@@ -14,7 +14,7 @@
     - name: Setup Node
       uses: actions/setup-node@v4
       with:
-         node-version: 20
+         node-version: 22
     - name: Install Dependencies
       run: npm install
       
@@ -26,8 +26,8 @@
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: 'asrlab'
-        environment_name: 'Asrlab-env'
+        application_name: 'lims'
+        environment_name: 'Lims-env'
         version_label: ${{github.sha}}
         region: ap-south-1
         deployment_package: asrlab-api.zip
