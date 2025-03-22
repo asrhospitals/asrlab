@@ -1,5 +1,0 @@
-module.exports={
-    AWS_ACCESS_KEY_ID:'AKIA6GBMDH3TIMC3LT3E',
-    AWS_SECRET_ACCESS_KEY:'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',
-    AWS_BUCKET_NAME:'myasrtrf',
-}

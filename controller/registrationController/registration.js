@@ -8,7 +8,6 @@ const verifyToken=require("../../middlewares/authMiddileware");
 const role=require("../../middlewares/roleMiddleware");
 const { v4: uuidv4 } = require('uuid');
 const router = express.Router();
-const config=require('../../config');
 
 
 
@@ -19,8 +18,8 @@ const config=require('../../config');
 const s3 = new S3Client({
     region: 'ap-south-1',
     credentials: {
-        accessKeyId: config.AWS_ACCESS_KEY_ID,
-        secretAccessKey: config.AWS_SECRET_ACCESS_KEY
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
     }
 });
 
@@ -77,7 +76,7 @@ router.post(
         const fileKey = `patients/${hospital_id}/${uuidv4()}-${req.file.originalname}`;
         
         const uploadParams = {
-          Bucket: config.AWS_BUCKET_NAME,
+          Bucket: process.env.AWS_BUCKET_NAME,
           Key: fileKey,
           Body: req.file.buffer,
           ContentType: req.file.mimetype
