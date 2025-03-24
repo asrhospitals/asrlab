@@ -8,11 +8,13 @@ const verifyToken=require("../../middlewares/authMiddileware");
 const role=require("../../middlewares/roleMiddleware");
 const { v4: uuidv4 } = require('uuid');
 const router = express.Router();
-const {S3Client}=require("@aws-sdk/client-s3");
+const {S3Client,PutObjectCommand}=require("@aws-sdk/client-s3");
 
 
 
-
+console.log("AWS Region:", process.env.AWS_REGION || 'ap-south-1');
+console.log("AWS Key ID exists:", !!process.env.AWS_ACCESS_KEY_ID);
+console.log("AWS Secret exists:", !!process.env.AWS_SECRET_ACCESS_KEY);
 
 
 
@@ -81,16 +83,19 @@ router.post(
           Bucket: process.env.AWS_BUCKET_NAME,
           Key: fileKey,
           Body: req.file.buffer,
-          ContentType: req.file.mimetype
+          ContentType: req.file.mimetype,
         };
         
-        // Upload to S3
-        const uploadResult = await s3.upload(uploadParams).promise();
-        fileUrl = uploadResult.Location; // Get the URL of the uploaded file
+        // Upload to S3 using SDK v3 method
+        const command = new PutObjectCommand(uploadParams);
+        await s3.send(command);
+        
+        // Generate URL (S3 v3 doesn't return URL directly)
+        fileUrl = `https://${process.env.AWS_BUCKET_NAME}.s3.${'ap-south-1'}.amazonaws.com/${fileKey}`;
       }
             
      
-
+ 
       // Create Patient Registration
       const createPatient = await Patient.create(
         {
