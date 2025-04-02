@@ -1,64 +1,61 @@
 const { DataTypes } = require('sequelize');
 const sequelize=require('../../../db/connectDB');
 
-const ReportDoctor=sequelize.define('reportdoctor',{
-    doctorName:{
+const KitMaster=sequelize.define('kit',{
+    kit_id:{
+        type:DataTypes.INTEGER,
+        primaryKey:true,
+        autoIncrement:true,
+    },
+    profilename:{
         type:DataTypes.STRING,
         allowNull:false
     },
-    gender:{
+    manufacture:{
         type:DataTypes.STRING,
         allowNull:false
     },
-    dob:{
-        type:DataTypes.DATEONLY,
-        allowNull:false
-    },
-    phoneNo:{
+    kitname:{
         type:DataTypes.STRING,
         allowNull:false
     },
-    addressLine1:{
+    negetiveindex:{
         type:DataTypes.STRING,
         allowNull:false
     },
-    city:{
+    boderlineindex:{
         type:DataTypes.STRING,
         allowNull:false
     },
-    state:{
+    positiveindex:{
         type:DataTypes.STRING,
         allowNull:false
     },
-    pin:{
+    method:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
+    batchno:{
         type:DataTypes.INTEGER,
         allowNull:false
     },
-    aptNo:{
+    units:{
+        type:DataTypes.INTEGER,
+        allowNull:false
+    },
+    negetiveinterpret:{
         type:DataTypes.STRING,
         allowNull:false
     },
-    department:{
+    borderlineinterpret:{
         type:DataTypes.STRING,
         allowNull:false
     },
-    email:{
+    positiveinterpret:{
         type:DataTypes.STRING,
-
-    },
-    medicalRegNo:{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
-    digitalSignature:{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
-    isactive:{
-        type:DataTypes.BOOLEAN,
         allowNull:false
     }
 
 });
 
-module.exports=ReportDoctor;
+module.exports=KitMaster;

@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequalize=require('../../../db/connectDB');
+const Nodal=require('../masterModel/nodalMaster');
 
 const Hospital=sequalize.define('hospitalmaster',{
     hospital_id: {
@@ -57,9 +58,23 @@ const Hospital=sequalize.define('hospitalmaster',{
         type:DataTypes.BOOLEAN,
         allowNull:false
     }, 
+    nodal_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: Nodal,
+            key: "nodal_id",
+        },
+        onDelete: "CASCADE",
+    },
 },{
     timestamps: false,
   
   });
+
+  /// Relation
+  Hospital.belongsTo(Nodal,{foreignKey:'nodal_id'});
+  Nodal.hasMany(Hospital,{foreignKey:'nodal_id'})
+
 
 module.exports=Hospital;

@@ -1,112 +1,92 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, STRING } = require("sequelize");
 const sequalize = require("../../../db/connectDB");
 
-const Test = sequalize.define("test", {
-  category: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  shortname: {
-    type: DataTypes.STRING,
+const PatientTest = sequalize.define("test", {
+  test_id:{
+    type:DataTypes.INTEGER,
+    primaryKey:true,
+    autoIncrement:true
   },
   department: {
     type: DataTypes.STRING,
   },
-  sample: {
+  subdivision: {
     type: DataTypes.STRING,
   },
-  samplequantity: {
+  testname: {
     type: DataTypes.STRING,
+    allowNull:false
   },
-  sampletemp: {
+  aliasname: {
     type: DataTypes.STRING,
+    allowNull:true
   },
-  method: {
-    type: DataTypes.STRING,
+  testcode:{
+    type:DataTypes.INTEGER,
+    allowNull:false
   },
-  instrumenttype: {
-    type: DataTypes.STRING,
+  shortcode:{
+    type:DataTypes.INTEGER,
+    allowNull:false
   },
-  description: {
-    type: DataTypes.STRING,
+  roletype:{
+    type:DataTypes.INTEGER,
+    allowNull:false
   },
-  sac: {
-    type: DataTypes.STRING,
+
+  /// cost of Test
+  patient:{
+    type:DataTypes.STRING,
+    allowNull:false
   },
-  container: {
-    type: DataTypes.STRING,
+  drref:{
+    type:DataTypes.INTEGER
   },
-  separatePrint: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
+  labtolab:{
+    type:DataTypes.INTEGER
   },
-  qcode: {
-    type: DataTypes.STRING,
+  walkin:{
+    type:DataTypes.INTEGER
   },
-  labRegNo: {
-    type: DataTypes.STRING,
+  reporttype:{
+    type:DataTypes.STRING,
+    allowNull:false
   },
-  noHeaderReport: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
+  mesuringunit:{
+    type:DataTypes.STRING
   },
-  enableAutoEmailAtApproval: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
+  refrange:{
+    type:DataTypes.STRING,
+    allowNull:false
   },
-  enableAutoSMSAtApproval: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
+  tat:{
+    type:DataTypes.STRING,
+    allowNull:false
   },
-  enableAutoWhatsappAtApproval: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
+  dieases:{
+    type:DataTypes.STRING
   },
-  enableIntermediateResultApproval: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
+  testdone:{
+    type:DataTypes.STRING
   },
-  enableNoIntermediateResult: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
+  specimentyepe:{
+    type:DataTypes.STRING
   },
-  ///Result
-  resultname: {
-    type: DataTypes.STRING,
+  volume:{
+    type:DataTypes.STRING
   },
-  resultnamelang: {
-    type: DataTypes.STRING,
+  tubecolor:{
+    type:DataTypes.STRING
   },
-  extresultid: {
-    type: DataTypes.STRING,
+  hospitaltype:{
+    type:DataTypes.STRING
   },
-  order: {
-    type: DataTypes.STRING,
+  testcategory:{
+    type:DataTypes.STRING
   },
-  unit: {
-    type: DataTypes.STRING,
-  },
-  formula: {
-    type: DataTypes.STRING,
-  },
-  valuetype: {
-    type: DataTypes.STRING,
-  },
-  defaultvalue: {
-    type: DataTypes.STRING,
-  },
-  roundof: {
-    type: DataTypes.INTEGER,
-  },
-  outsourcinglab: {
-    type: DataTypes.STRING,
-  },
-  outsrclabprice: {
-    type: DataTypes.DOUBLE,
+  processingcenter:{
+    type:DataTypes.STRING,
+    allowNull:false
   },
   accredationname: {
     type: DataTypes.STRING,
@@ -114,16 +94,6 @@ const Test = sequalize.define("test", {
   accredationdate: {
     type: DataTypes.DATE,
   },
-  addconsumable: { type: DataTypes.STRING },
-  addquantity: { type: DataTypes.INTEGER },
-  barcodelength: { type: DataTypes.INTEGER, allowNull: false },
-  tat: { type: DataTypes.INTEGER, allowNull: false },
-  stat: { type: DataTypes.INTEGER },
-  isactive: { type: DataTypes.BOOLEAN, allowNull: false },
-  instruction: { type: DataTypes.STRING },
-  interpretation: { type: DataTypes.STRING },
-  remarks: { type: DataTypes.STRING },
-  testprice: { type: DataTypes.DOUBLE, allowNull: false },
 });
 
-module.exports=Test;
+module.exports=PatientTest;

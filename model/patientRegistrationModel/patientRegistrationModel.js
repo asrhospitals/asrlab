@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("../../../db/connectDB");
-const Hospital = require("../masterModel/hospitalMaster");
-const User = require("../../authModel/authenticationModel/userModel");
+const sequelize = require("../../db/connectDB");
+const Hospital = require("../adminModel/masterModel/hospitalMaster");
+const User = require("../authModel/authenticationModel/userModel");
 
 const Patient = sequelize.define("patient", {
   patient_id: {

@@ -21,6 +21,8 @@ const { addTest, getTest, updateTest } = require('../../controller/adminControll
 const { addReagent, getReagent, updateReagent } = require('../../controller/adminController/masterController/reagentMaster');
 const { addDocAuth, getDocAuth, updateDocAuth } = require('../../controller/adminController/masterController/doctorAuthMaster');
 const { createProfile, fetchProfile, updateProfiles } = require('../../controller/adminController/masterController/profile');
+const { addColor, getColor, updateColors } = require('../../controller/adminController/masterController/colormaster');
+const { addKit, getKit, updateKit } = require('../../controller/adminController/masterController/kitmaster');
 
 
 
@@ -125,6 +127,17 @@ router.route('/update-test/:id').put(updateTest);
 router.route('/add-specimen').post(addSpecimen);
 router.route('/get-specimen').get(getSpecimen);
 router.route('/update-specimen/:id').put(updateSpecimen);
+
+///-----------Color Master---------------------
+router.route('/add-color').post(addColor);
+router.route('/get-color').get(getColor);
+router.route('/update-color/:id').put(updateColors);
+
+
+///----------Kit Master----------------------
+router.route('/add-kit').post(addKit);
+router.route('/get-kit').get(getKit);
+router.route('/update-kit/:id').put(updateKit);
 
 ///------------Doctor Authentication Master----------
 router.route('/add-docauth').post(addDocAuth);

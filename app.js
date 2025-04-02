@@ -4,7 +4,7 @@ const app=express();
 const cors=require("cors");
 const PORT=process.env.PORT || 2000;
 const MasterRoutes=require('./routes/adminRoutes/masterRoute');
-const RegistrationRoutes=require('./controller/registrationController/registration');
+const RegistrationRoutes=require('./controller/patientRegistrationController/patientRegistrationController');
 const ReportDoctor=require('./controller/adminController/masterController/reportDoctor');
 const AuthRoutes=require('./routes/authRoutes/authenticationRoute');
 const sequelize=require('./db/connectDB');
@@ -31,6 +31,7 @@ app.get('/',async (req,res) => {
 const server=async()=>{
     try {
         await sequelize.authenticate().then(()=>{console.log("Database Connected");}).catch(()=>{console.log("Database Connection Fail");});
+        // await sequelize.sync();
         app.listen(PORT,()=>{ console.log(`${PORT} port is Connected`);});
     } catch (error) {
         console.log(error)

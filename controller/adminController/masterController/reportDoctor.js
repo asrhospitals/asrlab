@@ -1,15 +1,27 @@
+require('dotenv').config(); 
 const ReportDoctor=require('../../../model/adminModel/masterModel/reportDoctorMaster');
 const multer = require("multer");
 const express = require("express");
-
-
-// Initialize Router
 const router = express.Router();
+const {S3Client,PutObjectCommand}=require("@aws-sdk/client-s3");
+const { v4: uuidv4 } = require('uuid');
 
-// Configure Multer to Save Files Temporarily
-// Configure Multer to Save Files Temporarily
-const storage = multer.memoryStorage(); // Store file in memory (buffer)
-const upload = multer({ storage: storage });
+
+// Configure AWS S3 (or equivalent cloud storage)
+const s3 = new S3Client({
+    region: 'ap-south-1',
+    credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+    }
+});
+
+// Configure Multer to store files in memory
+const storage = multer.memoryStorage();
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 2 * 1024 * 1024 } // 2MB limit
+});
 
 
 /// Add Report Doctor
@@ -31,13 +43,27 @@ router.post("/add-reportdoctor", upload.single("digitalsignature"), async (req, 
       medicalRegNo,
       isactive
     } = req.body;
-    const filePath = req.file.path;
 
     // Get image buffer from Multer
-    let imageBuffer = null;
-    if (req.file) {
-      imageBuffer = req.file.buffer; 
-    }
+       // Handle file upload to S3 (or your preferred cloud storage)
+       let fileUrl = null;
+       if (req.file) {
+         const fileKey = `signature/${uuidv4()}-${req.file.originalname}`;
+         
+         const uploadParams = {
+           Bucket: process.env.AWS_BUCKET_NAME,
+           Key: fileKey,
+           Body: req.file.buffer,
+           ContentType: req.file.mimetype,
+         };
+         
+         // Upload to S3 using SDK v3 method
+         const command = new PutObjectCommand(uploadParams);
+         await s3.send(command);
+         
+         // Generate URL (S3 v3 doesn't return URL directly)
+         fileUrl = `https://${process.env.AWS_BUCKET_NAME}.s3.${'ap-south-1'}.amazonaws.com/${fileKey}`;
+       }
 
     const newReportDoctor=await ReportDoctor.create({ 
         doctorName,
@@ -53,7 +79,7 @@ router.post("/add-reportdoctor", upload.single("digitalsignature"), async (req, 
         email,
         medicalRegNo,
         isactive,    
-        digitalSignature:imageBuffer,
+        digitalSignature:fileUrl,
     });
 
     // Response

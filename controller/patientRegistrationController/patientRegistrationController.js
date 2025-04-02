@@ -1,5 +1,5 @@
 require('dotenv').config(); 
-const Patient = require("../../model/adminModel/registration/pppregistration"); // Import the model
+const Patient = require("../../model/patientRegistrationModel/patientRegistrationModel"); 
 const multer = require("multer");
 const express = require("express");
 const { Op } = require("sequelize");
@@ -12,9 +12,6 @@ const {S3Client,PutObjectCommand}=require("@aws-sdk/client-s3");
 
 
 
-console.log("AWS Region:", process.env.AWS_REGION || 'ap-south-1');
-console.log("AWS Key ID exists:", !!process.env.AWS_ACCESS_KEY_ID);
-console.log("AWS Secret exists:", !!process.env.AWS_SECRET_ACCESS_KEY);
 
 
 

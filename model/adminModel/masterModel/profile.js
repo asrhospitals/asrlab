@@ -3,6 +3,11 @@ const sequelize = require('../../../db/connectDB');
 
 
 const Profile=sequelize.define('profile',{
+    profile_entry_id:{
+        type:DataTypes.INTEGER,
+        autoIncrement:true,
+        primaryKey:true
+    },
     profile_entry:{
         type:DataTypes.STRING,
         allowNull:false
