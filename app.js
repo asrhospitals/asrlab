@@ -4,9 +4,11 @@ const app=express();
 const cors=require("cors");
 const PORT=process.env.PORT || 2000;
 const MasterRoutes=require('./routes/adminRoutes/masterRoute');
-const RegistrationRoutes=require('./controller/patientRegistrationController/patientRegistrationController');
+const RegistrationRoutes=require('./routes/patientRoutes/patientRoutes');
 const ReportDoctor=require('./controller/adminController/masterController/reportDoctor');
 const AuthRoutes=require('./routes/authRoutes/authenticationRoute');
+const PatientImageUploader=require('./controller/commonImageUploader/patientImage');
+const SignatureImageUploader=require('./controller/commonImageUploader/signatureImage');
 const sequelize=require('./db/connectDB');
 const verifyToken=require("./middlewares/authMiddileware");
 const role=require("./middlewares/roleMiddleware");
@@ -22,6 +24,10 @@ app.use('/lims/master',verifyToken,role("admin"),MasterRoutes,ReportDoctor);
 
 /// Routes used by Phelbotomist
 app.use('/lims/ppp',verifyToken,role('phlebotomist','reception'),RegistrationRoutes);
+
+// Routes to upload images
+app.use('/lims/patient',PatientImageUploader);
+app.use('/lims/signature',SignatureImageUploader);
 
 // Test Route
 app.get('/',async (req,res) => {
