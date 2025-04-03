@@ -25,7 +25,7 @@ const upload = multer({
 });
 
 
-router.post('/upload-signature', upload.single('image'),async(req,res)=>{
+router.post('/upload-signature', upload.single('digitalsignature'),async(req,res)=>{
     try {
         
               // Handle file upload to S3 (or your preferred cloud storage)
