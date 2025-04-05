@@ -23,6 +23,7 @@ const { addDocAuth, getDocAuth, updateDocAuth } = require('../../controller/admi
 const { createProfile, fetchProfile, updateProfiles } = require('../../controller/adminController/masterController/profile');
 const { addColor, getColor, updateColors } = require('../../controller/adminController/masterController/colormaster');
 const { addKit, getKit, updateKit } = require('../../controller/adminController/masterController/kitmaster');
+const { addReportDoctor, getReportDoctor, updateReportDoctor } = require('../../controller/adminController/masterController/reportDoctor');
 
 
 
@@ -95,6 +96,11 @@ router.route('/update-tech/:id').put(updateTechnician);
 router.route('/add-refdoc').post(addRefDoctor);
 router.route('/get-refdoc').get(getRefDoc);
 router.route('/update-refdoc/:id').put(updateRefDoc);
+
+/// ------------Report Doctor Master--------------
+router.route('/add-reportdoctor').post(addReportDoctor);
+router.route('/get-reportdoctor').get(getReportDoctor);
+router.route('/update-reportdoctor/:id').put(updateReportDoctor);
 
 
 /// --------------Profile Entry Master------------------
