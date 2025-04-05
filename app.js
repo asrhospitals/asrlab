@@ -5,7 +5,6 @@ const cors=require("cors");
 const PORT=process.env.PORT || 2000;
 const MasterRoutes=require('./routes/adminRoutes/masterRoute');
 const RegistrationRoutes=require('./routes/patientRoutes/patientRoutes');
-const ReportDoctor=require('./controller/adminController/masterController/reportDoctor');
 const AuthRoutes=require('./routes/authRoutes/authenticationRoute');
 const PatientImageUploader=require('./controller/commonImageUploader/patientImage');
 const SignatureImageUploader=require('./controller/commonImageUploader/signatureImage');
@@ -20,7 +19,7 @@ app.use(express.json());
 app.use('/lims/authentication',AuthRoutes);
 
 /// All routes
-app.use('/lims/master',verifyToken,role("admin"),MasterRoutes,ReportDoctor);
+app.use('/lims/master',verifyToken,role("admin"),MasterRoutes);
 
 /// Routes used by Phelbotomist
 app.use('/lims/ppp',verifyToken,role('phlebotomist','reception'),RegistrationRoutes);
